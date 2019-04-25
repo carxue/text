@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.poi.util.IOUtils;
+import org.slf4j.Logger;
 
 /**
  * 读取配置文件工具类
@@ -14,7 +15,7 @@ import org.apache.log4j.Logger;
  */
 public class PropsConfig{
 
-	private static Logger logger=Logger.getLogger(PropsConfig.class);
+//	private static Logger logger=Logger.getLogger(PropsConfig.class);
 	
 	private static Properties props = new Properties();
 	
@@ -23,22 +24,24 @@ public class PropsConfig{
 	}
 	
 	private static synchronized void load() {
-		
+		 InputStream is = null;
 		try {
 			if(props==null || props.isEmpty()){
 			
 				String configName = System.getProperty("sys.config.name");
 	
-				 InputStream is = PropsConfig.class.getClassLoader().getResourceAsStream(configName);
+				  is = PropsConfig.class.getClassLoader().getResourceAsStream(configName);
 	
 				props.load(is);
 			}
 			
 		} catch (FileNotFoundException e) {
-			logger.error("PropsConfig.load FileNotFoundException", e);
+//			logger.error("PropsConfig.load FileNotFoundException", e);
 			e.printStackTrace();
 		} catch (IOException e) {
-			logger.error("PropsConfig.load IOException", e);
+//			logger.error("PropsConfig.load IOException", e);
+		}finally{
+			IOUtils.closeQuietly(is);
 		}
 			
 	}

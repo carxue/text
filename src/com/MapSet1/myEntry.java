@@ -14,10 +14,10 @@ public class myEntry
 	Set set=map.entrySet();
 	for(Iterator it=set.iterator();it.hasNext();)
 	{
-		Map.Entry entry=(Map.Entry)it.next();
-		String key=(String)entry.getKey();
-		String value=(String)entry.getValue();
-		System.out.println(key+":"+value);
+//		Map.Entry entry=(Map.Entry)it.next();
+//		String key=(String)entry.getKey();
+//		String value=(String)entry.getValue();
+//		System.out.println(key+":"+value);
 		
 	}
 }

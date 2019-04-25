@@ -3,7 +3,8 @@ package com.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
 
 
 /**    
@@ -21,7 +22,7 @@ import org.apache.log4j.Logger;
  */
 public class Config {
 	
-	private static final Logger log = Logger.getLogger(Config.class);
+//	private static final Logger log = Logger.getLogger(Config.class);
 
 	/**    
 	 * getValue(获取数据库配置的信息)    
@@ -37,7 +38,7 @@ public class Config {
 			return props.getProperty(key);
 		}
 		catch (IOException e) {
-			log.error("Config getValue:", e);
+//			log.error("Config getValue:", e);
 			e.printStackTrace();
 		}
 		finally {
@@ -45,7 +46,7 @@ public class Config {
 				is.close();
 			}
 			catch (IOException e) {
-				log.error("Config getValue:", e);
+//				log.error("Config getValue:", e);
 			}
 		}
 		return null;
@@ -65,7 +66,7 @@ public class Config {
 			return props.getProperty(key);
 		}
 		catch (IOException e) {
-			log.error("Config getConfig:", e);
+//			log.error("Config getConfig:", e);
 			e.printStackTrace();
 		}
 		finally {
@@ -73,7 +74,7 @@ public class Config {
 				is.close();
 			}
 			catch (IOException e) {
-				log.error("Config getConfig:", e);
+//				log.error("Config getConfig:", e);
 				e.printStackTrace();
 			}
 		}

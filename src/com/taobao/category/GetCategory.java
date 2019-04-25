@@ -40,7 +40,7 @@ public class GetCategory {
 		apiparamsMap.put("parent_cid", parent_cid); // 父目录id
 
 		// 生成签名
-		String sign = Util.md5Signature(apiparamsMap, secret);
+		String sign = "xx";//Util.md5Signature(apiparamsMap, secret);
 		apiparamsMap.put("sign", sign);
 		StringBuilder param = new StringBuilder();
 		for (Iterator<Map.Entry<String, String>> it = apiparamsMap.entrySet()
@@ -54,7 +54,7 @@ public class GetCategory {
 
 	// 根据父目录递归获取子目录，并写入txt文件
 	public static void getAllCats(String root) throws IOException {
-		String result = Util.getResult(Url, getCat(root));
+		String result = "22";//Util.getResult(Url, getCat(root));
 		// System.out.print(result);
 		if (result == null || result.length() == 0) {
 			System.out.print("root:" + root + " result null");// 获取不到，记录下来后面再手动补充
