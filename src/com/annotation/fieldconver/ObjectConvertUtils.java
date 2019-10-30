@@ -2,6 +2,7 @@ package com.annotation.fieldconver;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,12 +18,12 @@ public class ObjectConvertUtils<T,K> {
 	
 	private static Log logger = LogFactory.getLog(ObjectConvertUtils.class.getName());
 	
-	public static <T,K> void convertObjectAttrs(T t, K k) {
-		Class<?> toClass = t.getClass();
+	public static <T,K> void convertObjectAttrs(K source,T target) {
+		Class<?> toClass = target.getClass();
 		Field[] toFileds = null;
 		for (; toClass != Object.class; toClass = toClass.getSuperclass()) {
 			toFileds = toClass.getDeclaredFields();
-			loopSettingFields(t, k, toFileds);
+			loopSettingFields(target, source, toFileds);
 		}
 	}
 
@@ -77,5 +78,15 @@ public class ObjectConvertUtils<T,K> {
 				logger.error("数据赋值异常:"+e.getMessage());
 			}
 		}
+	}
+	
+	public static void main(String[] args) {
+		User user = new User();
+		user.setAge(22);
+		user.setMyCountry("中国");
+		user.setTime(new Date());
+		Person person = new Person();
+		convertObjectAttrs(user,person);
+		System.out.println(person);
 	}
 }
