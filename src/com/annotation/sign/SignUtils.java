@@ -42,9 +42,9 @@ public class SignUtils {
 				field.setAccessible(true);
 				try {
 					Object FieldVal = field.get(t);
-					if (FieldVal != null) {
-						map.put(fieldAnno.fieldName(), FieldVal);
-					}
+//					if (FieldVal != null) {
+						map.put(field.getName(), FieldVal);
+//					}
 				} catch (Exception e) {
 					logger.error("获取签名属性异常:" + e.getMessage());
 				}

@@ -8,7 +8,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface SignAttr {
-	public enum Ignore{Y,N};
-	String fieldName();//对应字段
+	String message() default "";//对应字段
 }
 

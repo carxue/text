@@ -2,15 +2,13 @@ package com.annotation.sign;
 
 import java.util.Date;
 
-import com.annotation.fieldconver.FieldConvert;
-
 public class User1 extends SupUser1{
-	@SignAttr(fieldName="name")
+	@SignAttr
 	private String name;
-	@SignAttr(fieldName="psword")
+	@SignAttr
 	private String psword;
 	private Integer age;
-	@SignAttr(fieldName="time")
+	@SignAttr
 	private Date time;
 
 	public String getName() {

@@ -1,22 +1,16 @@
 package com.annotation.test;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.annotation.fieldconver.ObjectConvertUtils;
-import com.annotation.fieldconver.Person;
 import com.annotation.sign.SignUtils;
 import com.annotation.sign.User1;
 
@@ -37,7 +31,7 @@ public class Test {
 		user.setMyCountry("中国");
 		user.setName("薛奎");
 		user.setPsword("222323");
-		user.setTime(new Date());
+//		user.setTime(null);
 		user.setSex(true);
 		DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 		String signStr = SignUtils.needSignAnnotationStr(user,df);
@@ -45,7 +39,7 @@ public class Test {
 		Map<String,Object> map = new HashMap<>();
 		map.put("name", "薛奎");
 		map.put("age", new Integer(22));
-		map.put("date", new Date());
+		map.put("time", null);
 		String signStr1 = SignUtils.mapSortStr(map,df);
 		System.out.println(signStr1);
 		

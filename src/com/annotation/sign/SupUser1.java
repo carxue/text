@@ -2,7 +2,7 @@ package com.annotation.sign;
 
 public class SupUser1 {
 	private Boolean sex;
-	@SignAttr(fieldName="myCountry")
+	@SignAttr
 	private String myCountry;
 	
 	public String getMyCountry() {
