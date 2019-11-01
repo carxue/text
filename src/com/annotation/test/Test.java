@@ -26,22 +26,11 @@ public class Test {
 		} else {
 			System.out.println("-ssss--");
 		}
-		User1 user = new User1();
-		user.setAge(22);
-		user.setMyCountry("中国");
-		user.setName("薛奎");
-		user.setPsword("222323");
-//		user.setTime(null);
-		user.setSex(true);
 		DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-		String signStr = SignUtils.needSignAnnotationStr(user,df);
-		System.out.println(signStr);
 		Map<String,Object> map = new HashMap<>();
-		map.put("name", "薛奎");
-		map.put("age", new Integer(22));
-		map.put("time", null);
+		map.put("id", "94");
 		String signStr1 = SignUtils.mapSortStr(map,df);
-		System.out.println(signStr1);
+		System.out.println(SignUtils.encrypt(signStr1, "thirdedusalt", true));
 		
 	}
 	
