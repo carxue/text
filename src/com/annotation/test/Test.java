@@ -26,24 +26,71 @@ public class Test {
 		} else {
 			System.out.println("-ssss--");
 		}
-		DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-		Map<String,Object> map = new HashMap<>();
-		map.put("id", "94");
-		String signStr1 = SignUtils.mapSortStr(map,df);
-		System.out.println(SignUtils.encrypt(signStr1, "thirdedusalt", true));
-		
+
+		DateFormat format = new SimpleDateFormat("yyyyMMdd");
+		System.out.println(checkiSWeekend("20191109", format));
+		System.out.println(checkiSWeekend("20191110", format));
+		System.out.println(getFirstDayOfMonth(2019, 12, format) + ":" + getLastDayOfMonth(2019, 12, format));
+		String monthOfDay = "20191110";
+		int year = Integer.parseInt(monthOfDay.substring(0, 4));
+		int month = Integer.parseInt(monthOfDay.substring(4, 6));
+		int day = Integer.parseInt(monthOfDay.substring(6, 8));
+		System.out.println(year+":"+month+":"+day);
+		System.out.println(""+year+month);
 	}
-	
-	
+
+	private static boolean checkiSWeekend(String bDate, DateFormat format1) {
+		Date bdate = null;
+		try {
+			bdate = format1.parse(bDate);
+		} catch (ParseException e) {
+		}
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(bdate);
+		if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static String getFirstDayOfMonth(int year, int month, DateFormat sdf) {
+		Calendar cal = Calendar.getInstance();
+		// 设置年份
+		cal.set(Calendar.YEAR, year);
+		// 设置月份
+		cal.set(Calendar.MONTH, month - 1);
+		// 获取某月最小天数
+		int firstDay = cal.getMinimum(Calendar.DATE);
+		// 设置日历中月份的最小天数
+		cal.set(Calendar.DAY_OF_MONTH, firstDay);
+		// 格式化日期
+		return sdf.format(cal.getTime());
+	}
+
+	public static String getLastDayOfMonth(int year, int month, DateFormat sdf) {
+		Calendar cal = Calendar.getInstance();
+		// 设置年份
+		cal.set(Calendar.YEAR, year);
+		// 设置月份
+		cal.set(Calendar.MONTH, month - 1);
+		// 获取某月最大天数
+		int lastDay = cal.getActualMaximum(Calendar.DATE);
+		// 设置日历中月份的最大天数
+		cal.set(Calendar.DAY_OF_MONTH, lastDay);
+		// 格式化日期
+		return sdf.format(cal.getTime());
+	}
+
 	private static String handleYear(Date date) {
 		DateFormat df = new SimpleDateFormat("yyyyMM");
 		String today = df.format(date);
-		int year = Integer.parseInt(today.substring(0,4));
-		int month = Integer.parseInt(today.substring(4,6));
-		if(month>=8&&month<=12) {
-			return year+"";
+		int year = Integer.parseInt(today.substring(0, 4));
+		int month = Integer.parseInt(today.substring(4, 6));
+		if (month >= 8 && month <= 12) {
+			return year + "";
 		}
-		return (year-1)+"";
+		return (year - 1) + "";
 	}
 
 	public static Date getDateByStr2(String dd) {
