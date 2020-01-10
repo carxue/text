@@ -4,19 +4,19 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.annotation.sign.SignUtils;
-import com.annotation.sign.User1;
-
 public class Test {
-	public static void main(String[] args)
-			throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+	public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException,
+			InvocationTargetException, InterruptedException, ParseException {
 		System.out.println(new BaseMapping().callMethod("select_user", "薛奎"));
 		String qOpenid = "123";
 		String openid = "456";
@@ -27,16 +27,92 @@ public class Test {
 			System.out.println("-ssss--");
 		}
 
-		DateFormat format = new SimpleDateFormat("yyyyMMdd");
-		System.out.println(checkiSWeekend("20191109", format));
-		System.out.println(checkiSWeekend("20191110", format));
-		System.out.println(getFirstDayOfMonth(2019, 12, format) + ":" + getLastDayOfMonth(2019, 12, format));
-		String monthOfDay = "20191110";
-		int year = Integer.parseInt(monthOfDay.substring(0, 4));
-		int month = Integer.parseInt(monthOfDay.substring(4, 6));
-		int day = Integer.parseInt(monthOfDay.substring(6, 8));
-		System.out.println(year+":"+month+":"+day);
-		System.out.println(""+year+month);
+		List mylist = new ArrayList(); // 生成数据集，用来保存随即生成数，并用于判断
+		Random rd = new Random();
+		Map map = new HashMap();
+
+		while (mylist.size() < 10) {
+			int num = rd.nextInt(11);
+			if (!mylist.contains(num)) {
+				mylist.add(num); // 往集合里面添加数据。
+			}
+		}
+
+		String region = "sync_entire_network_resources:com.kankan.module.search.util.CacheUtils";
+		String key = generatorVersionKey(region, "enr_last_sync_movie_sub_time");
+		System.out.println(key);
+
+		Date curTime = new Date();
+		curTime=DateUtils.parse(DateUtils.format(curTime, "yyyy-MM-dd HH:00:00"), "yyyy-MM-dd HH:00:00");
+		System.out.println(curTime);
+	}
+
+	public static Date getNextMonthFirstDay(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, 1);
+		return calendar.getTime();
+	}
+
+	public static Date getMonthFirstDay(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, 0);
+		return calendar.getTime();
+	}
+
+	public static boolean isTrimEmpty(String str) {
+		if (str == null || str.trim().length() == 0) {
+			return true;
+		}
+		return false;
+	}
+
+	private static String generatorVersionKey(String region, String key) {
+		return md5Key(region + "::" + key);
+	}
+
+	private static <K, T> String md5Key(String key, Object... salts) {
+		// 计算盐值
+		String _salt = "";
+		if (salts != null) {
+			for (Object s : salts) {
+				_salt += s;
+			}
+		}
+		return MD5Utils.encrypt(key, _salt);
+	}
+
+	public static Date dayAdd(Date date, int days) {
+		Calendar calendar = Calendar.getInstance();// new一个Calendar类,把Date放进去
+		calendar.setTime(date);
+		calendar.add(Calendar.DATE, days);// 实现日期加一操作,也就是明天
+		return calendar.getTime();
+	}
+
+	public static String removeDomain(String path, String domain) {
+		if (path.contains(domain)) {
+			return path.replace(domain, "");
+		}
+		return path;
+	}
+
+	public static String addDomain(String path, String domain) {
+		StringBuilder sb = new StringBuilder();
+		if (StringUtils.isNotBlank(path)) {
+			if (path.contains(",")) {
+				String[] imgs = path.split(",");
+				for (String img : imgs) {
+					sb.append(domain).append(img).append(",");
+				}
+				return sb.substring(0, sb.length() - 1);
+			} else {
+				return domain + path;
+			}
+		}
+		return path;
 	}
 
 	private static boolean checkiSWeekend(String bDate, DateFormat format1) {
