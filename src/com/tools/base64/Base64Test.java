@@ -15,7 +15,7 @@ public class Base64Test {
 	public static void encodedText() throws UnsupportedEncodingException {
 		final Decoder decoder = Base64.getDecoder();
 		final Encoder encoder = Base64.getEncoder();
-		final String text = "字串文字";
+		final String text = "字串文字水电费水电费水电费";
 		final byte[] textByte = text.getBytes("UTF-8");
 		//编码
 		final String encodedText = encoder.encodeToString(textByte);

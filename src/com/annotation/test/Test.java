@@ -42,9 +42,7 @@ public class Test {
 		String key = generatorVersionKey(region, "enr_last_sync_movie_sub_time");
 		System.out.println(key);
 
-		Date curTime = new Date();
-		curTime=DateUtils.parse(DateUtils.format(curTime, "yyyy-MM-dd HH:00:00"), "yyyy-MM-dd HH:00:00");
-		System.out.println(curTime);
+		System.out.println(new Long(1851));
 	}
 
 	public static Date getNextMonthFirstDay(Date date) {
