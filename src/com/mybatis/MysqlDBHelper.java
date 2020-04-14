@@ -481,7 +481,7 @@ public class MysqlDBHelper {
 			String typename = rsm.getColumnTypeName(i + 1);//字段类型明
 			if(typename.indexOf("UNSIGNED")>-1)
 				typename=typename.split(" ")[0];
-			javaSB.append("\n/**\n*"+commnetsMap.get(rsm.getColumnName(i + 1).toUpperCase())+"\n*/\n");
+			javaSB.append("\n/**\n*"+commnetsMap.get(rsm.getColumnName(i + 1))+"\n*/\n");
 			javaSB.append("private "+javaTypeMap.get(typename)+" "+columnv+";\n");
 		}
 		javaAttr.addCDATA(javaSB.toString());
@@ -753,7 +753,7 @@ public class MysqlDBHelper {
 	public static void main(String[] args) throws Exception, Exception {
 		
 		clearXml("mybait.xml");//清除旧的生成文件
-		productXML("infant_user_login_log",true);//是否生成驼峰式/数据源格式
+		productXML("infant_course_system",true);//是否生成驼峰式/数据源格式
 
 	}
 }
