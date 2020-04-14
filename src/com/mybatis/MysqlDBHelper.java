@@ -163,7 +163,7 @@ public class MysqlDBHelper {
 		trim.addAttribute("suffixOverrides", ",");
 		for (int i = 0; i < rsm.getColumnCount(); i++) {
 			Element ifs=trim.addElement("if");
-			String column=rsm.getColumnName(i + 1).toLowerCase();
+			String column=rsm.getColumnName(i + 1);
 			String typename = rsm.getColumnTypeName(i + 1);//字段类型明
 			if(typename.indexOf("UNSIGNED")>-1)
 				typename=typename.split(" ")[0];
@@ -223,9 +223,9 @@ public class MysqlDBHelper {
 				ifs.addAttribute("test",column+" !=null and "+column+" != ''");
 			
 			if(i+1!=rsm.getColumnCount()){
-				ifs.setText(column.toUpperCase()+"=#{"+column+",jdbcType="+typename+"},");
+				ifs.setText(column+"=#{"+column+",jdbcType="+typename+"},");
 			}else{
-				ifs.setText(column.toUpperCase()+"=#{"+column+",jdbcType="+typename+"}");
+				ifs.setText(column+"=#{"+column+",jdbcType="+typename+"}");
 			}
 			
 		}
@@ -239,7 +239,7 @@ public class MysqlDBHelper {
 		sbb.append("INSERT INTO "+table.toUpperCase()+"(");
 
 		for (int i = 0; i < rsm.getColumnCount(); i++) {
-			String column=rsm.getColumnName(i + 1).toUpperCase();
+			String column=rsm.getColumnName(i + 1);
 			if(i+1!=rsm.getColumnCount()){
 				sbb.append(column+", ");
 			}else{
@@ -334,7 +334,7 @@ public class MysqlDBHelper {
 		columns.addAttribute("id", "薛奎Column");
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < rsm.getColumnCount(); i++) {
-			String column=rsm.getColumnName(i + 1).toUpperCase();
+			String column=rsm.getColumnName(i + 1);
 			if(i<rsm.getColumnCount()-1){
 				sb.append(column+",");
 				if((i+1)%10==0)
@@ -379,7 +379,7 @@ public class MysqlDBHelper {
 				ifs.addAttribute("test",column+" !=null and "+column+" != ''");
 			
 			if(i+1!=rsm.getColumnCount()){
-				ifs.setText(rsm.getColumnName(i + 1).toUpperCase()+",");
+				ifs.setText(rsm.getColumnName(i + 1)+",");
 			}else{
 				ifs.setText(rsm.getColumnName(i + 1).toUpperCase());
 			}
@@ -431,9 +431,9 @@ public class MysqlDBHelper {
 				ifs.addAttribute("test",column+" !=null and "+column+" != ''");
 			
 			if(i+1!=rsm.getColumnCount()){
-				ifs.setText(columnss.toUpperCase()+"=#{"+column+",jdbcType="+typename+"},");
+				ifs.setText(columnss+"=#{"+column+",jdbcType="+typename+"},");
 			}else{
-				ifs.setText(columnss.toUpperCase()+"=#{"+column+",jdbcType="+typename+"}");
+				ifs.setText(columnss+"=#{"+column+",jdbcType="+typename+"}");
 			}
 			
 		}
@@ -447,7 +447,7 @@ public class MysqlDBHelper {
 		sbb.append("INSERT INTO "+table.toUpperCase()+"(");
 
 		for (int i = 0; i < rsm.getColumnCount(); i++) {
-			String column=rsm.getColumnName(i + 1).toUpperCase();
+			String column=rsm.getColumnName(i + 1);
 			if(i+1!=rsm.getColumnCount()){
 				sbb.append(column+", ");
 			}else{
@@ -513,7 +513,7 @@ public class MysqlDBHelper {
 			Element hibernateProperty = root.addElement("property");
 			hibernateProperty.addAttribute("name", columnv);
 			hibernateProperty.addAttribute("type", hibernateTypeMap.get(typename));
-			hibernateProperty.addAttribute("column", rsm.getColumnName(i + 1).toUpperCase());
+			hibernateProperty.addAttribute("column", rsm.getColumnName(i + 1));
 		}
 				
 		
