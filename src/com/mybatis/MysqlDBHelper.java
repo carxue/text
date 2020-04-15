@@ -753,7 +753,7 @@ public class MysqlDBHelper {
 	public static void main(String[] args) throws Exception, Exception {
 		
 		clearXml("mybait.xml");//清除旧的生成文件
-		productXML("infant_course_system",true);//是否生成驼峰式/数据源格式
+		productXML("infant_course_system_directory",true);//是否生成驼峰式/数据源格式
 
 	}
 }
