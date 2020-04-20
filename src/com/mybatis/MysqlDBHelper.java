@@ -155,7 +155,7 @@ public class MysqlDBHelper {
 		Element insert = root.addElement("insert");
 		insert.addAttribute("parameterType", "****");
 		insert.addAttribute("id","****" );
-		insert.setText("INSERT INTO "+table.toUpperCase());
+		insert.setText("INSERT INTO "+table);
 		
 		Element trim=insert.addElement("trim");
 		trim.addAttribute("prefix", "(");
@@ -206,7 +206,7 @@ public class MysqlDBHelper {
 		
 		//生成动态更新语句
 		Element update = root.addElement("update");
-		update.setText("UPDATE "+table.toUpperCase());
+		update.setText("UPDATE "+table);
 		update.addAttribute("parameterType", "薛奎");
 		update.addAttribute("id","薛奎" );
 		Element set=update.addElement("set");
@@ -236,7 +236,7 @@ public class MysqlDBHelper {
 		insertother.addAttribute("parameterType", "薛奎");
 		insertother.addAttribute("id","薛奎" );
 		
-		sbb.append("INSERT INTO "+table.toUpperCase()+"(");
+		sbb.append("INSERT INTO "+table+"(");
 
 		for (int i = 0; i < rsm.getColumnCount(); i++) {
 			String column=rsm.getColumnName(i + 1);
@@ -361,7 +361,7 @@ public class MysqlDBHelper {
 		Element insert = root.addElement("insert");
 		insert.addAttribute("parameterType", "****");
 		insert.addAttribute("id","****" );
-		insert.setText("INSERT INTO "+table.toUpperCase());
+		insert.setText("INSERT INTO "+table);
 		
 		Element trim=insert.addElement("trim");
 		trim.addAttribute("prefix", "(");
@@ -413,7 +413,7 @@ public class MysqlDBHelper {
 		
 		//生成动态更新语句
 		Element update = root.addElement("update");
-		update.setText("UPDATE "+table.toUpperCase());
+		update.setText("UPDATE "+table);
 		update.addAttribute("parameterType", "薛奎");
 		update.addAttribute("id","薛奎 " );
 		Element set=update.addElement("set");
@@ -444,7 +444,7 @@ public class MysqlDBHelper {
 		insertother.addAttribute("parameterType", "薛奎");
 		insertother.addAttribute("id","薛奎" );
 		
-		sbb.append("INSERT INTO "+table.toUpperCase()+"(");
+		sbb.append("INSERT INTO "+table+"(");
 
 		for (int i = 0; i < rsm.getColumnCount(); i++) {
 			String column=rsm.getColumnName(i + 1);
