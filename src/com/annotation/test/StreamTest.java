@@ -1,16 +1,21 @@
 package com.annotation.test;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang.StringUtils;
 
 public class StreamTest {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
 //		// 获取对应的平方数
 		List<Integer> squaresList = numbers.parallelStream().map( i -> i*i).distinct().collect(Collectors.toList());
@@ -30,8 +35,69 @@ public class StreamTest {
 		System.out.println("合并字符串: " + mergedString);
 		
 
+		Student s1 = new Student("aa", 10);
+		Student s2 = new Student("bb", 20);
+		Student s3 = new Student("cc", 10);
+		Student s4 = new Student("dd", 8);
+		Student s5 = new Student("ee", 15);
+//		Student s6 = new Student("aa", 15);//key重复会报错
+		List<Student> slist = Arrays.asList(s1, s2, s3, s4, s5);
+		// map：接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素
+		List<Integer> ageList = slist.stream().map(Student::getAge).collect(Collectors.toList());
+		ageList.forEach(System.out::println);
+		//flatMap：接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个流
+		List<String> strlist = Arrays.asList("a,b,c", "1,2,3");
+		Stream<String> stream = strlist.stream().flatMap(element->{
+			String[] chararr = element.split(",");
+			Stream<String> stream1=Arrays.stream(chararr);
+			return stream1;
+		});
+		stream.forEach(System.out::println);
+		System.out.println("==============list convert to map====================");
+		Map<String,Integer> stuMap = slist.stream().collect(Collectors.toMap(Student::getName,Student::getAge));
+		stuMap.forEach((k,v)->{
+			System.out.println(k+":"+v);
+		});
+		System.out.println("-------------------------");
+		Set<Integer> ageSet = slist.stream().map(Student::getAge).filter(age->age>10).sorted().skip(1).collect(Collectors.toSet());
+		ageSet.forEach(System.out::println);
+		System.out.println("------------sort by object-------------");
+		List<Student> stuList =  slist.stream().sorted((x,y)->{
+			if(x.getName().equals(y.getName())) {
+				return x.getAge()-y.getAge();
+			}else {
+				return x.getName().compareTo(y.getName());
+			}
+		 }).collect(Collectors.toList());
+		stuList.forEach(System.out::println);
+		System.out.println("-----------peek setvalue--------------");
+		slist.stream().peek(a->{
+			a.setAge(100);
+		}).forEach(System.out::println);
+		
+		System.out.println("-------------------------");
+		//统计总人数
+		Long count2 = slist.stream().collect(Collectors.counting());
+		System.out.println("总人数:"+count2);
+		int maxAge = slist.stream().map(Student::getAge).collect(Collectors.maxBy(Integer::compare)).get();
+		System.out.println("最大年纪:"+maxAge);
+		int sumAge = slist.stream().collect(Collectors.summingInt(Student::getAge));
+		System.out.println("所有人的年纪:"+sumAge);
+		double avgAge = slist.stream().collect(Collectors.averagingDouble(Student::getAge));
+		System.out.println("所有人的平均年纪:"+avgAge);
+
+		// 带上以上所有方法
+//		DoubleSummaryStatistics statistics = list.stream().collect(Collectors.summarizingDouble(Student::getAge));
+//		System.out.println("count:" + statistics.getCount() + ",max:" + statistics.getMax() + ",sum:" + statistics.getSum() + ",average:" + statistics.getAverage());
+
+		BufferedReader reader = new BufferedReader(new FileReader("F:\\Test_path\\test.txt"));
+		Stream<String> lineStream = reader.lines();
+		lineStream.forEach(System.out::println);
+		reader.close();
+		
+		System.out.println("===============stream end===================");
+		//流的终止操作
 		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
-		 
 		boolean allMatch = list.stream().allMatch(e -> e > 10); //false
 		boolean noneMatch = list.stream().noneMatch(e -> e > 10); //true
 		boolean anyMatch = list.stream().anyMatch(e -> e > 4);  //true
@@ -41,26 +107,11 @@ public class StreamTest {
 		 
 		long count1 = list.stream().count(); //5
 		Integer max = list.stream().max(Integer::compareTo).get(); //5
-		System.out.println(findFirst+":::"+findFirst+":::"+count1+":::"+max);
+		System.out.println(findFirst+":::"+findFirst+":::"+count1+":::"+max);	
 		
 		
-
-		Student s1 = new Student("aa", 10);
-		Student s2 = new Student("bb", 20);
-		Student s3 = new Student("cc", 10);
-		Student s4 = new Student("dd", 8);
-		Student s5 = new Student("ee", 15);
-		List<Student> slist = Arrays.asList(s1, s2, s3, s4, s5);
-
-		List<Integer> ageList = slist.stream().map(Student::getAge).collect(Collectors.toList());
-		ageList.forEach(System.out::println);
-		Map<String,Integer> stuMap = slist.stream().collect(Collectors.toMap(Student::getName,Student::getAge));
-		stuMap.forEach((k,v)->{
-			System.out.println(k+":"+v);
-		});
-		System.out.println("-------------------------");
-		Set<Integer> ageSet = slist.stream().map(Student::getAge).filter(age->age>10).sorted().collect(Collectors.toSet());
-		ageSet.forEach(System.out::println);
+//		Predicate 
+		
 
 	}
 
