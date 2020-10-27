@@ -38,11 +38,30 @@ public class Test {
 			}
 		}
 
-		String region = "sync_entire_network_resources:com.kankan.module.search.util.CacheUtils";
-		String key = generatorVersionKey(region, "enr_last_sync_movie_sub_time");
+		String region = "com.kankan.service.infant.system.web.InfantLoginController.getLoginCaptcha";
+		String key = generatorVersionKey(region, "Rn.Lc.87237.1595744649");
 		System.out.println(key);
 
-		System.out.println(new Long(1851));
+	}
+	public static int getFirstWeek(Date date) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		return c.get(Calendar.DAY_OF_WEEK);
+	}
+	
+	public static Date addByDate(Date date, int type, int value) {
+		Calendar now = Calendar.getInstance();
+		now.setTime(date);
+		now.set(type, now.get(type) + value);
+		return now.getTime();
+	}
+	
+	public static Date getPreMonthFirstDay(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, -1);
+		return calendar.getTime();
 	}
 
 	public static Date getNextMonthFirstDay(Date date) {
