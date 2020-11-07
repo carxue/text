@@ -83,10 +83,12 @@ public class ObjectConvertUtils<T,K> {
 	public static void main(String[] args) {
 		User user = new User();
 		user.setAge(22);
-		user.setMyCountry("中国");
 		user.setTime(new Date());
+		user.setMyCountry("中国");//父类属性
+		//没有属性值的对象
 		Person person = new Person();
-		convertObjectAttrs(user,person);
+		//将user对象的属性值转换到person对象上
+		ObjectConvertUtils.convertObjectAttrs(user,person);
 		System.out.println(person);
 	}
 }

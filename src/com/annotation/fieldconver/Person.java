@@ -61,4 +61,10 @@ public class Person extends SupHuman{
 	public void setCreateItme(Date createItme) {
 		this.createItme = createItme;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString()+" Person [userName=" + userName + ", passWord=" + passWord + ", userAge=" + userAge + ", createItme="
+				+ createItme + ", sex=" + sex + ", salary=" + salary + "]";
+	}
 }
