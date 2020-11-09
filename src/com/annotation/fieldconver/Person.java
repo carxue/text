@@ -1,70 +1,89 @@
 package com.annotation.fieldconver;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class Person extends SupHuman{
-	@FieldConvert(filed="name")
-	private String userName;
-	@FieldConvert(filed="psword")
-	private String passWord;
-	@FieldConvert(filed="age")
-	private Integer userAge;
-	@FieldConvert(filed="time")
-	private Date createItme;
-	private Boolean sex;
-	private Double salary;
+public class Person<E> extends SupHuman {
+    @FieldConvert(filed = "name")
+    private String userName;
+    @FieldConvert(filed = "psword")
+    private String passWord;
+    @FieldConvert(filed = "age")
+    private Integer userAge;
+    @FieldConvert(filed = "time")
+    private Date createItme;
+    private Boolean sex;
+    private Double salary;
+    @FieldConvert(filed = "elist")
+    private List<E> list = new ArrayList<E>();
 
-	public Boolean getSex() {
-		return sex;
-	}
+    public List<E> getList() {
+        return list;
+    }
 
-	public void setSex(Boolean sex) {
-		this.sex = sex;
-	}
+    public void setList(List<E> list) {
+        this.list = list;
+    }
 
-	public Double getSalary() {
-		return salary;
-	}
+    public Boolean getSex() {
+        return sex;
+    }
 
-	public void setSalary(Double salary) {
-		this.salary = salary;
-	}
+    public void setSex(Boolean sex) {
+        this.sex = sex;
+    }
 
-	public String getUserName() {
-		return userName;
-	}
+    public Double getSalary() {
+        return salary;
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
 
-	public String getPassWord() {
-		return passWord;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
-	}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-	public Integer getUserAge() {
-		return userAge;
-	}
+    public String getPassWord() {
+        return passWord;
+    }
 
-	public void setUserAge(Integer userAge) {
-		this.userAge = userAge;
-	}
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
 
-	public Date getCreateItme() {
-		return createItme;
-	}
+    public Integer getUserAge() {
+        return userAge;
+    }
 
-	public void setCreateItme(Date createItme) {
-		this.createItme = createItme;
-	}
+    public void setUserAge(Integer userAge) {
+        this.userAge = userAge;
+    }
 
-	@Override
-	public String toString() {
-		return super.toString()+" Person [userName=" + userName + ", passWord=" + passWord + ", userAge=" + userAge + ", createItme="
-				+ createItme + ", sex=" + sex + ", salary=" + salary + "]";
-	}
+    public Date getCreateItme() {
+        return createItme;
+    }
+
+    public void setCreateItme(Date createItme) {
+        this.createItme = createItme;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "userName='" + userName + '\'' +
+                ", passWord='" + passWord + '\'' +
+                ", userAge=" + userAge +
+                ", createItme=" + createItme +
+                ", sex=" + sex +
+                ", salary=" + salary +
+                ", list=" + list +
+                '}';
+    }
 }

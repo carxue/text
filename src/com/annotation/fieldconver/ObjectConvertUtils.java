@@ -2,7 +2,9 @@ package com.annotation.fieldconver;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -85,6 +87,8 @@ public class ObjectConvertUtils<T,K> {
 		user.setAge(22);
 		user.setTime(new Date());
 		user.setMyCountry("中国");//父类属性
+		List<Object> list = Arrays.asList("sdfds",new Integer(1));
+		user.setElist(list);
 		//没有属性值的对象
 		Person person = new Person();
 		//将user对象的属性值转换到person对象上

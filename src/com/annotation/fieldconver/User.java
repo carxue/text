@@ -1,12 +1,15 @@
 package com.annotation.fieldconver;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class User extends SupUser{
+public class User<E> extends SupUser{
 	private String name;
 	private String psword;
 	private Integer age;
 	private Date time;
+	private List<E> elist = new ArrayList<E>();
 
 	public String getName() {
 		return name;
@@ -22,6 +25,14 @@ public class User extends SupUser{
 
 	public void setPsword(String psword) {
 		this.psword = psword;
+	}
+
+	public List<E> getElist() {
+		return elist;
+	}
+
+	public void setElist(List<E> elist) {
+		this.elist = elist;
 	}
 
 	public Integer getAge() {
