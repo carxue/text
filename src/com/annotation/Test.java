@@ -1,10 +1,16 @@
 package com.annotation;
 
+import com.annotation.fieldconver.UserType;
+
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
 
 @DocumentAnnotation(name="薛奎")
@@ -52,6 +58,41 @@ public class Test {
 		stack.push(1);stack.push(2);stack.push(3);
 		while(!stack.isEmpty())
 			System.out.println(stack.pop());
-		
+
+		System.out.println("============"+UserType.SMS.getText());
+		Integer a = new Integer(130);
+		Integer b = new Integer(131);
+		System.out.println(a.compareTo(b));
+
+		BigDecimal mainTotal = BigDecimal.ZERO;
+		mainTotal.add(new BigDecimal(100));
+		mainTotal.add(new BigDecimal(2));
+		System.out.println(mainTotal.intValue());
+
+		DecimalFormat df1 = new DecimalFormat("0000");
+		String id = df1.format(1);
+		System.out.println(id);
+		BigDecimal ret = new BigDecimal("2");
+		BigDecimal buy = new BigDecimal("3");
+/*
+		BigDecimal rate = ret.divide(buy,2, BigDecimal.ROUND_HALF_UP);
+*/
+		BigDecimal aa = new BigDecimal("60").multiply(new BigDecimal("2")).divide(new BigDecimal("3"),2, BigDecimal.ROUND_HALF_UP);
+		System.out.println(aa);
+
+		Integer da = new Integer(1233443);
+		Integer daa = new Integer(123344);
+		System.out.println(da>daa);
+		Set<Boolean> set = new HashSet<>();
+		set.add(true);
+		set.add(new Boolean(true));
+		/*set.add(false);*/
+		System.out.println(set.size());
+
+
+	}
+
+	private static void a(UserType type){
+		type = UserType.UMS;
 	}
 }
