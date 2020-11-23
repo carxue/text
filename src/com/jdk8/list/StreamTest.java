@@ -1,5 +1,8 @@
 package com.jdk8.list;
 
+import com.annotation.fieldconver.Person;
+import com.annotation.fieldconver.User;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -10,7 +13,7 @@ public class StreamTest {
 		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	    Stream<Integer> stream = numbers.stream();
 	    stream.filter((x) -> {return x % 2 == 0; }).map((x) -> {return x * x;}).forEach(System.out::println);
-		streamReduceCount(null);
+		streamMap(null);
 	}
 
 	/*Lists是Guava中的一个工具类*/
@@ -22,7 +25,25 @@ public class StreamTest {
 		System.out.println("stream创建,filter把所有numbers变量的Stream转换成另外一个过滤掉null以后的Stream,count聚合"+notNullCount);
 	}
 
-	/*转换*/
+	/*转换Map将User对象列表转换为对象列表Person*/
+	private static void streamMap(Object obj){
+		/*map对于Stream中包含的元素使用给定的转换函数进行转换操作新生成的Stream只包含转换生成的元*/
+		User user1 = new User();user1.setName("carxue");user1.setAge(15);
+		User user2 = new User();user2.setName("小雪");user2.setAge(20);
+		User user3 = new User();user3.setName("小wang");user3.setAge(30);
+		List<User> numbers = Arrays.asList(user1,user2,user3);
+		List<String> names=numbers.stream().map(user->user.getName()).peek(System.out::println).collect(Collectors.toList());
+		List<Person> persons=numbers.stream().map(user-> {
+                    Person person = new Person();
+                    person.setUserName(user.getName());
+                    person.setUserAge(user.getAge());
+                    return person;
+				}
+		).peek(System.out::println).collect(Collectors.toList());
+	}
+
+
+	/*转换MapTo*/
 	private static void streamMapToInt(Object obj){
 		/*map对于Stream中包含的元素使用给定的转换函数进行转换操作新生成的Stream只包含转换生成的元*/
 		List<Integer> numbers = Arrays.asList(1, 6, 7, 4, null, 6, 7, 8, null, 10);
@@ -101,5 +122,6 @@ public class StreamTest {
 		numbers.stream().filter(a->a!=null).max(((o1, o2) -> o1.compareTo(o2))).ifPresent(System.out::println);
 
 	}
+
 
 }
