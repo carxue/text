@@ -51,4 +51,14 @@ public class User<E> extends SupUser{
 		this.time = time;
 	}
 
+	@Override
+	public String toString() {
+		return "User{" +
+				"name='" + name + '\'' +
+				", psword='" + psword + '\'' +
+				", age=" + age +
+				", time=" + time +
+				", elist=" + elist +
+				'}';
+	}
 }

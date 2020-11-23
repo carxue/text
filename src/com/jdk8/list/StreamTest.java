@@ -13,7 +13,7 @@ public class StreamTest {
 		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	    Stream<Integer> stream = numbers.stream();
 	    stream.filter((x) -> {return x % 2 == 0; }).map((x) -> {return x * x;}).forEach(System.out::println);
-		streamMap(null);
+		streamSorted(null);
 	}
 
 	/*Lists是Guava中的一个工具类*/
@@ -121,6 +121,42 @@ public class StreamTest {
 		System.out.println("mix:" +mix.get());
 		numbers.stream().filter(a->a!=null).max(((o1, o2) -> o1.compareTo(o2))).ifPresent(System.out::println);
 
+		/*average（Operator），返回平均值*/
+		List<Integer> numList = Arrays.asList(1, 6, 7, 4, null, 6, 7, 8, null, 10);
+		double avgAge = numList.stream().filter(a->a!=null).distinct().mapToInt(num->num*2).average().getAsDouble();
+		System.out.println(avgAge);
+
+		/*summaryStatistics统计结果*/
+		IntSummaryStatistics statistics = numList.stream().filter(a->a!=null).distinct().mapToInt(num->num*2).summaryStatistics();
+		System.out.println(statistics.getMax());
+	}
+
+	/*sort用于排序操作 statistics*/
+	private static void streamSorted(Object obj){
+		User user1 = new User();user1.setName("carxue");user1.setAge(80);
+		User user2 = new User();user2.setName("小雪");user2.setAge(20);
+		User user3 = new User();user3.setName("小wang");user3.setAge(20);
+		List<User> numbers = Arrays.asList(user1,user2,user3);
+		numbers.stream().sorted(Comparator.comparing(User::getAge)).forEach(System.out::println);
+
+		IntSummaryStatistics statistics = numbers.stream().filter(a->a!=null).mapToInt(User::getAge).summaryStatistics();
+		System.out.println(statistics.getMax());
+		System.out.println(statistics.getMin());
+		System.out.println(statistics.getAverage());
+		System.out.println(statistics.getSum());
+		System.out.println(statistics.getCount());
+
+	}
+
+	/*join用于字符串拼接*/
+	private static void streamJoin(Object obj){
+		List<String> numbers = Arrays.asList("a","b","c");
+		String s = numbers.stream().collect(Collectors.joining());
+		System.out.println(s);
+		String s1 = numbers.stream().collect(Collectors.joining("-"));
+		System.out.println(s1);
+		String s2 = numbers.stream().collect(Collectors.joining("-","(",")"));
+		System.out.println(s2);
 	}
 
 
