@@ -20,6 +20,11 @@ public class StreamTest {
         streamParallel(null);
     }
 
+    /*list转换为map*/
+    public Map<Integer, Person> getIdAccountMap(List<Person> bb) {
+        return bb.stream().collect(Collectors.toMap(Person::getUserAge, a -> a));
+    }
+
     /*并行（parallel）程序*/
     private static void streamParallel(Object obj) {
         /*parallelStream()与stream()区别是parallelStream()使用多线程去并发遍历，而stream()是单线程*/
