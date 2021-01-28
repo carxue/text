@@ -18,6 +18,21 @@ public class StreamTest {
             return x * x;
         }).forEach(System.out::println);
         streamParallel(null);
+
+        List<Person> bb = new ArrayList<>();
+        Person p = new Person();p.setUserAge(12);p.setUserName("haha");
+        Person p1 = new Person();p1.setUserAge(12);p1.setUserName("haha1");
+        Person p2 = new Person();p2.setUserAge(13);p2.setUserName("haha2");
+        bb.add(p);bb.add(p1);bb.add(p2);
+        Map<Integer, Person> personMap = getIdAccountRepetitionMap(bb);
+        personMap.forEach((k,v)->{
+            System.out.println(k+":"+v);
+        });
+    }
+
+    /*list转换为map防止重复ID报错的问题*/
+    public static Map<Integer, Person> getIdAccountRepetitionMap(List<Person> bb) {
+        return bb.stream().collect(Collectors.toMap(Person::getUserAge, a -> a,(c,d)->c));
     }
 
     /*list转换为map*/
