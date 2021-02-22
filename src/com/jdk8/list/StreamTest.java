@@ -23,7 +23,9 @@ public class StreamTest {
         Person p = new Person();p.setUserAge(12);p.setUserName("haha");
         Person p1 = new Person();p1.setUserAge(12);p1.setUserName("haha1");
         Person p2 = new Person();p2.setUserAge(13);p2.setUserName("haha2");
-        bb.add(p);bb.add(p1);bb.add(p2);
+        Person p3 = new Person();p3.setUserAge(null);p3.setUserName("haha3");
+        Person p4 = new Person();p4.setUserAge(null);p4.setUserName("haha4");
+        bb.add(p);bb.add(p1);bb.add(p2);bb.add(p3);bb.add(p4);
         Map<Integer, Person> personMap = getIdAccountRepetitionMap(bb);
         personMap.forEach((k,v)->{
             System.out.println(k+":"+v);
